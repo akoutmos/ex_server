@@ -41,6 +41,7 @@ defmodule Server.MixProject do
       {:floki, ">= 0.30.0", only: :test},
       {:esbuild, "~> 0.3", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:heex_formatter, github: "feliperenan/heex_formatter", only: :dev},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},

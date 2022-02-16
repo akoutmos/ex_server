@@ -1,18 +1,18 @@
 # Server
 
-To start your Phoenix server:
+## Description
 
-  * Install dependencies with `mix deps.get`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+Server is a simple HTTP server meant for use during local development. It makes it easy to
+start a file explorer from the current working directory and open files.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## Installation and Usage
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+Install the archive by running: `mix archive.install hex server`
 
-## Learn more
+Run the server from any directory by running `mix server`
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+## Acknowledgements
+
+https://github.com/wojtekmach/mix_install_examples
+https://undraw.co/
+https://merakiui.com/components/

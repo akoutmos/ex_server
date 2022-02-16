@@ -1,5 +1,9 @@
 [
+  plugins: [HeexFormatter],
   import_deps: [:phoenix],
   line_length: 120,
-  inputs: ["*.{ex,exs}", "{config,lib,test}/**/*.{ex,exs}"]
+  inputs: [
+    "*.{heex,ex,exs}",
+    "{config,lib,test}/**/*.{heex,ex,exs}"
+  ]
 ]

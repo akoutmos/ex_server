@@ -7,6 +7,7 @@ defmodule ServerWeb.FileExplorerLive do
 
   def render(assigns) do
     ~H"""
+
     Current temperature: <%= @temperature %>
     """
   end
