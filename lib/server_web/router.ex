@@ -1,6 +1,8 @@
 defmodule ServerWeb.Router do
   use ServerWeb, :router
 
+  alias ServerWeb.DirectoryCheckPlug
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -10,18 +12,13 @@ defmodule ServerWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
+  pipeline :file_explorer do
+    plug DirectoryCheckPlug
   end
 
   scope "/", ServerWeb do
-    pipe_through :browser
+    pipe_through [:browser, :file_explorer]
 
-    get "/", PageController, :index
+    live "/*path", FileExplorerLive
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", ServerWeb do
-  #   pipe_through :api
-  # end
 end

@@ -8,6 +8,7 @@ defmodule Server.MixProject do
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: Mix.compilers(),
+      build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -55,7 +56,14 @@ defmodule Server.MixProject do
   defp aliases do
     [
       setup: ["deps.get"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["esbuild default --minify", "phx.digest"],
+      build: [&build_release/1]
     ]
+  end
+
+  defp build_release(_) do
+    Mix.env(:prod)
+    Mix.Task.run("assets.deploy", [])
+    Mix.Task.run("archive.build", [])
   end
 end
