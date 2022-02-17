@@ -7,8 +7,8 @@ start a file explorer from the current working directory and open files.
 
 ## Installation and Usage
 
-Install the archive by running: `mix archive.install hex ex_server`
-Run the server from any directory by running `mix server`
+- Install the archive by running: `mix archive.install hex ex_server`
+- Run the server from any directory by running `mix server`
 
 ## Screenshots
 
@@ -22,6 +22,6 @@ Run the server from any directory by running `mix server`
 
 ## Acknowledgements
 
-Very much inspired by: https://github.com/wojtekmach/mix_install_examples
-Thanks for the icon: https://undraw.co/
-Thanks for the Tailwind CSS snippets: https://merakiui.com/components/
+- Very much inspired by: https://github.com/wojtekmach/mix_install_examples
+- Thanks for the icon: https://undraw.co/
+- Thanks for the Tailwind CSS snippets: https://merakiui.com/components/
