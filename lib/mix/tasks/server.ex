@@ -1,15 +1,26 @@
 defmodule Mix.Tasks.Server do
   @moduledoc """
-  This Mix task is used to start an HTTP server from the
-  current working directory
+  This Mix task is used to start an HTTP server from the current working
+  directory. If the directory contains an `index.html` or `index.htm` file
+  then that file will be served. Else a file explorer will be presented.
+
+  The valid CLI arguments include:
+
+  ```
+  --port   The port that the server should run on (default is 4040)
+  ```
   """
 
   use Mix.Task
 
+  @shortdoc "Start an HTTP server from the current working directory"
+
   @version Mix.Project.config()[:version]
   @server_deps Mix.Project.config()[:deps]
 
-  @shortdoc "Start an HTTP server from the current working directory"
+  @switches [
+    port: :integer
+  ]
 
   @impl true
   def run([version]) when version in ~w(-v --version) do
@@ -25,7 +36,9 @@ defmodule Mix.Tasks.Server do
     """)
   end
 
-  def run(_args) do
+  def run(args) do
+    port = parse_port(args)
+
     # Supporting lib and runtime configuration
     Application.put_env(:phoenix, :json_library, Jason)
     Application.put_env(:esbuild, :version, "0.14.0")
@@ -41,7 +54,7 @@ defmodule Mix.Tasks.Server do
 
     # Configure the endpoint server
     Application.put_env(:ex_server, ExServerWeb.Endpoint,
-      http: [ip: {127, 0, 0, 1}, port: 4444],
+      http: [ip: {127, 0, 0, 1}, port: port],
       server: true,
       secret_key_base: String.duplicate("a", 64),
       cache_static_manifest: "priv/static/cache_manifest.json",
@@ -52,5 +65,20 @@ defmodule Mix.Tasks.Server do
 
     {:ok, _} = Supervisor.start_link([ExServerWeb.Endpoint], strategy: :one_for_one)
     Process.sleep(:infinity)
+  end
+
+  defp parse_port(args) do
+    args
+    |> OptionParser.parse(strict: @switches)
+    |> case do
+      {[port: port], [], []} ->
+        port
+
+      {[], [], []} ->
+        4040
+
+      _ ->
+        raise "Invalid CLI arguments provided. Run `mix help server` for the help menu"
+    end
   end
 end

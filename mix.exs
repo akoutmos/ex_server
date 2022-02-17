@@ -57,8 +57,8 @@ defmodule ExServer.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.17.5"},
       {:floki, ">= 0.30.0", only: :test},
-      {:esbuild, "~> 0.3", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:esbuild, "~> 0.3", only: :dev, runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.1", only: :dev, runtime: Mix.env() == :dev},
       {:heex_formatter, github: "feliperenan/heex_formatter", only: :dev},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:telemetry_metrics, "~> 0.6"},
@@ -83,8 +83,12 @@ defmodule ExServer.MixProject do
   end
 
   defp build_release(_) do
-    Mix.env(:prod)
+    # Build the static assets using dev deps
+    Mix.env(:dev)
     Mix.Task.run("assets.deploy", [])
+
+    # Archive the library for production deploy
+    Mix.env(:prod)
     Mix.Task.run("archive.build", ["-o", "archives/ex_server-#{@version}.ez"])
   end
 end
