@@ -45,14 +45,18 @@ defmodule ExServerWeb.FileExplorerLive do
   end
 
   @doc false
-  def on_mount(:contains_index_file, %{"path" => requested_path}, _seesion, socket) do
+  def on_mount(:contains_index_file, %{"path" => []}, session, socket) do
+    on_mount(:contains_index_file, %{"path" => [""]}, session, socket)
+  end
+
+  def on_mount(:contains_index_file, %{"path" => requested_path}, _session, socket) do
     cond do
-      requested_path |> Path.join("index.htm") |> File.exists?() ->
-        redirect_path = Path.join(requested_path, "index.htm")
+      requested_path |> Path.join() |> Path.join("index.html") |> IO.inspect(label: "RAWR") |> File.exists?() ->
+        redirect_path = requested_path |> Path.join() |> Path.join("index.html")
         {:halt, redirect(socket, to: "/#{redirect_path}")}
 
       requested_path |> Path.join("index.html") |> File.exists?() ->
-        redirect_path = Path.join(requested_path, "index.html")
+        redirect_path = requested_path |> Path.join() |> Path.join("index.htm")
         {:halt, redirect(socket, to: "/#{redirect_path}")}
 
       true ->
