@@ -29,6 +29,7 @@ defmodule Mix.Tasks.Server do
     # Supporting lib and runtime configuration
     Application.put_env(:phoenix, :json_library, Jason)
     Application.put_env(:esbuild, :version, "0.14.0")
+    Application.put_env(:tailwind, :version, "3.0.12")
     Application.put_env(:logger, :console, level: :info)
 
     # Configure logger
