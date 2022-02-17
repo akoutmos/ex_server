@@ -1,5 +1,5 @@
-defmodule ServerWeb.LayoutViewTest do
-  use ServerWeb.ConnCase, async: true
+defmodule ExServerWeb.LayoutViewTest do
+  use ExServerWeb.ConnCase, async: true
 
   # When testing helpers, you may want to import Phoenix.HTML and
   # use functions such as safe_to_string() to convert the helper

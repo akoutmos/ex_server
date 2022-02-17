@@ -1,14 +1,14 @@
-defmodule ServerWeb.ErrorViewTest do
-  use ServerWeb.ConnCase, async: true
+defmodule ExServerWeb.ErrorViewTest do
+  use ExServerWeb.ConnCase, async: true
 
   # Bring render/3 and render_to_string/3 for testing custom views
   import Phoenix.View
 
   test "renders 404.html" do
-    assert render_to_string(ServerWeb.ErrorView, "404.html", []) == "Not Found"
+    assert render_to_string(ExServerWeb.ErrorView, "404.html", []) == "Not Found"
   end
 
   test "renders 500.html" do
-    assert render_to_string(ServerWeb.ErrorView, "500.html", []) == "Internal Server Error"
+    assert render_to_string(ExServerWeb.ErrorView, "500.html", []) == "Internal Server Error"
   end
 end
