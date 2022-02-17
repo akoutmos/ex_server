@@ -8,10 +8,10 @@
 import Config
 
 # Configures the endpoint
-config :server, ServerWeb.Endpoint,
+config :ex_server, ExServerWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: ServerWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: Server.PubSub,
+  render_errors: [view: ExServerWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: ExServer.PubSub,
   live_view: [signing_salt: "mrDaKTu2"]
 
 # Configure esbuild (the version is required)

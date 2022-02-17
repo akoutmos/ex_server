@@ -1,4 +1,4 @@
-defmodule Server do
+defmodule ExServer do
   @moduledoc """
   Server keeps the contexts that define your domain
   and business logic.

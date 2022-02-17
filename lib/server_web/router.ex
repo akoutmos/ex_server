@@ -1,13 +1,13 @@
-defmodule ServerWeb.Router do
-  use ServerWeb, :router
+defmodule ExServerWeb.Router do
+  use ExServerWeb, :router
 
-  alias ServerWeb.DirectoryCheckPlug
+  alias ExServerWeb.DirectoryCheckPlug
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {ServerWeb.LayoutView, :root}
+    plug :put_root_layout, {ExServerWeb.LayoutView, :root}
     plug :put_secure_browser_headers
   end
 
@@ -15,7 +15,7 @@ defmodule ServerWeb.Router do
     plug DirectoryCheckPlug
   end
 
-  scope "/", ServerWeb do
+  scope "/", ExServerWeb do
     pipe_through [:browser, :file_explorer]
 
     live "/*path", FileExplorerLive

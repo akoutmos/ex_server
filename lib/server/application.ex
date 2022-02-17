@@ -1,4 +1,4 @@
-defmodule Server.Application do
+defmodule ExServer.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -9,18 +9,18 @@ defmodule Server.Application do
   def start(_type, _args) do
     children = [
       # Start the Telemetry supervisor
-      ServerWeb.Telemetry,
+      ExServerWeb.Telemetry,
       # Start the PubSub system
-      {Phoenix.PubSub, name: Server.PubSub},
+      {Phoenix.PubSub, name: ExServer.PubSub},
       # Start the Endpoint (http/https)
-      ServerWeb.Endpoint
-      # Start a worker by calling: Server.Worker.start_link(arg)
-      # {Server.Worker, arg}
+      ExServerWeb.Endpoint
+      # Start a worker by calling: ExServer.Worker.start_link(arg)
+      # {ExServer.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Server.Supervisor]
+    opts = [strategy: :one_for_one, name: ExServer.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
@@ -28,7 +28,7 @@ defmodule Server.Application do
   # whenever the application is updated.
   @impl true
   def config_change(changed, _new, removed) do
-    ServerWeb.Endpoint.config_change(changed, removed)
+    ExServerWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

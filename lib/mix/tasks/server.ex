@@ -40,7 +40,7 @@ defmodule Mix.Tasks.Server do
     )
 
     # Configure the endpoint server
-    Application.put_env(:server, ServerWeb.Endpoint,
+    Application.put_env(:ex_server, ExServerWeb.Endpoint,
       http: [ip: {127, 0, 0, 1}, port: 4444],
       server: true,
       secret_key_base: String.duplicate("a", 64),
@@ -50,7 +50,7 @@ defmodule Mix.Tasks.Server do
 
     Mix.install(@server_deps)
 
-    {:ok, _} = Supervisor.start_link([ServerWeb.Endpoint], strategy: :one_for_one)
+    {:ok, _} = Supervisor.start_link([ExServerWeb.Endpoint], strategy: :one_for_one)
     Process.sleep(:infinity)
   end
 end

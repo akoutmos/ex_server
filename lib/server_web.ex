@@ -1,12 +1,12 @@
-defmodule ServerWeb do
+defmodule ExServerWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use ServerWeb, :controller
-      use ServerWeb, :view
+      use ExServerWeb, :controller
+      use ExServerWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,10 +19,10 @@ defmodule ServerWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: ServerWeb
+      use Phoenix.Controller, namespace: ExServerWeb
 
       import Plug.Conn
-      alias ServerWeb.Router.Helpers, as: Routes
+      alias ExServerWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -30,7 +30,7 @@ defmodule ServerWeb do
     quote do
       use Phoenix.View,
         root: "lib/server_web/templates",
-        namespace: ServerWeb
+        namespace: ExServerWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -44,7 +44,7 @@ defmodule ServerWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {ServerWeb.LayoutView, "live.html"}
+        layout: {ExServerWeb.LayoutView, "live.html"}
 
       unquote(view_helpers())
     end
@@ -93,8 +93,8 @@ defmodule ServerWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import ServerWeb.ErrorHelpers
-      alias ServerWeb.Router.Helpers, as: Routes
+      import ExServerWeb.ErrorHelpers
+      alias ExServerWeb.Router.Helpers, as: Routes
     end
   end
 

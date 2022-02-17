@@ -1,5 +1,5 @@
-defmodule ServerWeb.LayoutView do
-  use ServerWeb, :view
+defmodule ExServerWeb.LayoutView do
+  use ExServerWeb, :view
 
   alias Phoenix.LiveView.JS
 

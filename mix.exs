@@ -1,10 +1,12 @@
-defmodule Server.MixProject do
+defmodule ExServer.MixProject do
   use Mix.Project
+
+  @version "0.1.0"
 
   def project do
     [
       app: :ex_server,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.12",
       name: "Mix Server",
       source_url: "https://github.com/akoutmos/ex_server",
@@ -25,7 +27,7 @@ defmodule Server.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Server.Application, []},
+      mod: {ExServer.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -37,7 +39,7 @@ defmodule Server.MixProject do
   defp package do
     [
       name: "ex_server",
-      files: ~w(lib priv mix.exs README.md LICENSE),
+      files: ~w(archives lib priv mix.exs README.md LICENSE),
       licenses: ["MIT"],
       maintainers: ["Alex Koutmos"],
       links: %{
@@ -83,6 +85,6 @@ defmodule Server.MixProject do
   defp build_release(_) do
     Mix.env(:prod)
     Mix.Task.run("assets.deploy", [])
-    Mix.Task.run("archive.build", [])
+    Mix.Task.run("archive.build", ["-o", "archives/ex_server-#{@version}.ez"])
   end
 end

@@ -1,9 +1,9 @@
-defmodule ServerWeb.FileExplorerLive do
+defmodule ExServerWeb.FileExplorerLive do
   @moduledoc """
   This LiveView module is used to
   """
 
-  use ServerWeb, :live_view
+  use ExServerWeb, :live_view
 
   on_mount {__MODULE__, :contains_index_file}
 

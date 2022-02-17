@@ -1,5 +1,5 @@
-defmodule ServerWeb.ErrorView do
-  use ServerWeb, :view
+defmodule ExServerWeb.ErrorView do
+  use ExServerWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

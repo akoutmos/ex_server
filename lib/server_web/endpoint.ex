@@ -1,5 +1,5 @@
-defmodule ServerWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :server
+defmodule ExServerWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :ex_server
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
@@ -18,7 +18,7 @@ defmodule ServerWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :server,
+    from: :ex_server,
     gzip: false,
     only: ~w(assets fonts images favicon.ico robots.txt)
 
@@ -41,5 +41,5 @@ defmodule ServerWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug ServerWeb.Router
+  plug ExServerWeb.Router
 end

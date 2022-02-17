@@ -1,4 +1,4 @@
-defmodule ServerWeb.DirectoryCheckPlug do
+defmodule ExServerWeb.DirectoryCheckPlug do
   @moduledoc """
   This plug checks to see if the current request is
   for a file or for a direcotry. If it is for a file,
