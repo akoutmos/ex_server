@@ -1,1 +1,7 @@
-<div>This is the file system stuff</div>
+<div class="grid grid-cols-5 gap-4">
+  <%= for {name, stats} <- @entries do %>
+    <%= live_redirect to: Routes.live_path(@socket, __MODULE__, @current_path ++ [name]) do %>
+      <%= name %>
+    <% end %>
+  <% end %>
+</div>
