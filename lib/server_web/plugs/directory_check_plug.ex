@@ -34,18 +34,7 @@ defmodule ServerWeb.DirectoryCheckPlug do
       File.cwd!()
       |> Path.join(desired_path)
 
-    index_file_path = contains_index_file(requested_filesystem_object)
-
     cond do
-      File.dir?(requested_filesystem_object) and !is_nil(index_file_path) ->
-        Logger.info("Requested index file: #{inspect(index_file_path)}")
-        content_type = MIME.from_path(index_file_path)
-
-        conn
-        |> put_resp_content_type(content_type)
-        |> send_file(200, index_file_path)
-        |> halt()
-
       File.dir?(requested_filesystem_object) ->
         Logger.info("Requested directory: #{inspect(requested_filesystem_object)}")
         protect_from_forgery(conn)
@@ -70,19 +59,6 @@ defmodule ServerWeb.DirectoryCheckPlug do
 
   def call(conn, _opts) do
     redirect_to_cwd(conn)
-  end
-
-  defp contains_index_file(requested_filesystem_object) do
-    cond do
-      requested_filesystem_object |> Path.join("index.htm") |> File.exists?() ->
-        Path.join(requested_filesystem_object, "index.htm")
-
-      requested_filesystem_object |> Path.join("index.html") |> File.exists?() ->
-        Path.join(requested_filesystem_object, "index.html")
-
-      true ->
-        nil
-    end
   end
 
   defp redirect_to_cwd(conn) do
