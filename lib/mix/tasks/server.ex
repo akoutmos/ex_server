@@ -37,12 +37,14 @@ defmodule Mix.Tasks.Server do
   end
 
   def run(args) do
+    # Parse the cli args
     port = parse_port(args)
+
+    # Set the Mix env
+    Mix.env(:prod)
 
     # Supporting lib and runtime configuration
     Application.put_env(:phoenix, :json_library, Jason)
-    Application.put_env(:esbuild, :version, "0.14.0")
-    Application.put_env(:tailwind, :version, "3.0.12")
     Application.put_env(:logger, :console, level: :info)
 
     # Configure logger
@@ -61,8 +63,15 @@ defmodule Mix.Tasks.Server do
       live_view: [signing_salt: "FtRh_twgiYg7vABG"]
     )
 
-    Mix.install(@server_deps)
+    # Install production dependencies
+    @server_deps
+    |> Enum.filter(fn
+      {package, version} when is_atom(package) and is_binary(version) -> true
+      _ -> false
+    end)
+    |> Mix.install()
 
+    # Start the Phoenix server
     {:ok, _} = Supervisor.start_link([ExServerWeb.Endpoint], strategy: :one_for_one)
     Process.sleep(:infinity)
   end

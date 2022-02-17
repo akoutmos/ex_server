@@ -52,19 +52,20 @@ defmodule ExServer.MixProject do
   # Specifies your project dependencies.
   defp deps do
     [
+      # Archive dependencies
       {:phoenix, "~> 1.6.6"},
       {:phoenix_html, "~> 3.0"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.17.5"},
+      {:jason, "~> 1.3"},
+      {:plug_cowboy, "~> 2.5"},
+
+      # Development dependencies
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:floki, ">= 0.30.0", only: :test},
       {:esbuild, "~> 0.3", only: :dev, runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.1", only: :dev, runtime: Mix.env() == :dev},
       {:heex_formatter, github: "feliperenan/heex_formatter", only: :dev},
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:telemetry_metrics, "~> 0.6"},
-      {:telemetry_poller, "~> 1.0"},
-      {:jason, "~> 1.3"},
-      {:plug_cowboy, "~> 2.5"}
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
 
@@ -78,17 +79,7 @@ defmodule ExServer.MixProject do
     [
       setup: ["deps.get"],
       "assets.deploy": ["esbuild default --minify", "tailwind default --minify", "phx.digest"],
-      build: [&build_release/1]
+      version: ["run -e \"IO.puts(Mix.Project.config[:version])\" --no-start"]
     ]
-  end
-
-  defp build_release(_) do
-    # Build the static assets using dev deps
-    Mix.env(:dev)
-    Mix.Task.run("assets.deploy", [])
-
-    # Archive the library for production deploy
-    Mix.env(:prod)
-    Mix.Task.run("archive.build", ["-o", "archives/ex_server-#{@version}.ez"])
   end
 end
