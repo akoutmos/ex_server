@@ -37,7 +37,7 @@ defmodule Server.MixProject do
   defp package do
     [
       name: "ex_server",
-      files: ~w(lib priv mix.exs README.md LICENSE CHANGELOG.md),
+      files: ~w(lib priv mix.exs README.md LICENSE),
       licenses: ["MIT"],
       maintainers: ["Alex Koutmos"],
       links: %{
