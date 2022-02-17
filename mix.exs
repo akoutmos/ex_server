@@ -3,15 +3,20 @@ defmodule Server.MixProject do
 
   def project do
     [
-      app: :server,
+      app: :ex_server,
       version: "0.1.0",
       elixir: "~> 1.12",
+      name: "Mix Server",
+      source_url: "https://github.com/akoutmos/ex_server",
+      homepage_url: "https://hex.pm/packages/ex_server",
+      description: "This mix task allows you to start a server anywhere on the file system and serve files.",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: Mix.compilers(),
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      package: package()
     ]
   end
 
@@ -29,9 +34,20 @@ defmodule Server.MixProject do
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
 
+  defp package do
+    [
+      name: "ex_server",
+      files: ~w(lib priv mix.exs README.md LICENSE CHANGELOG.md),
+      licenses: ["MIT"],
+      maintainers: ["Alex Koutmos"],
+      links: %{
+        "GitHub" => "https://github.com/akoutmos/ex_server",
+        "Sponsor" => "https://github.com/sponsors/akoutmos"
+      }
+    ]
+  end
+
   # Specifies your project dependencies.
-  #
-  # Type `mix help deps` for examples and options.
   defp deps do
     [
       {:phoenix, "~> 1.6.6"},
