@@ -1,4 +1,4 @@
-# Server
+# Mix HTTP Server
 
 ## Description
 
@@ -7,9 +7,14 @@ start a file explorer from the current working directory and open files.
 
 ## Installation and Usage
 
-Install the archive by running: `mix archive.install hex server`
-
+Install the archive by running: `mix archive.install hex ex_server`
 Run the server from any directory by running `mix server`
+
+## Screenshots
+
+<img align="center" src="guides/images/light_mode.png" alt="Light mode screenshot">
+
+<img align="center" src="guides/images/dark_mode.png" alt="Dark mode screenshot">
 
 ## Acknowledgements
 
