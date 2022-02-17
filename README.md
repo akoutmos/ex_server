@@ -12,12 +12,16 @@ Run the server from any directory by running `mix server`
 
 ## Screenshots
 
-<img align="center" src="guides/images/light_mode.png" alt="Light mode screenshot">
+### Light mode
 
-<img align="center" src="guides/images/dark_mode.png" alt="Dark mode screenshot">
+<img align="center" height="175" src="guides/images/light_mode.png" alt="Light mode screenshot">
+
+### Dark mode
+
+<img align="center" height="175" src="guides/images/dark_mode.png" alt="Dark mode screenshot">
 
 ## Acknowledgements
 
-https://github.com/wojtekmach/mix_install_examples
-https://undraw.co/
-https://merakiui.com/components/
+Very much inspired by: https://github.com/wojtekmach/mix_install_examples
+Thanks for the icon: https://undraw.co/
+Thanks for the Tailwind CSS snippets: https://merakiui.com/components/
