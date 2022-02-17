@@ -5,6 +5,8 @@ defmodule ServerWeb.FileExplorerLive do
 
   use ServerWeb, :live_view
 
+  on_mount {__MODULE__, :contains_index_file}
+
   def mount(%{"path" => requested_path}, _session, socket) do
     assigns = [
       entries: get_files_from_path(requested_path),
@@ -40,5 +42,21 @@ defmodule ServerWeb.FileExplorerLive do
 
       {entry, file_stat}
     end)
+  end
+
+  @doc false
+  def on_mount(:contains_index_file, %{"path" => requested_path}, _seesion, socket) do
+    cond do
+      requested_path |> Path.join("index.htm") |> File.exists?() ->
+        redirect_path = Path.join(requested_path, "index.htm")
+        {:halt, redirect(socket, to: "/#{redirect_path}")}
+
+      requested_path |> Path.join("index.html") |> File.exists?() ->
+        redirect_path = Path.join(requested_path, "index.html")
+        {:halt, redirect(socket, to: "/#{redirect_path}")}
+
+      true ->
+        {:cont, socket}
+    end
   end
 end

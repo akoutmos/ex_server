@@ -1,5 +1,5 @@
 <main class="flex justify-center">
-  <div class="absolute top-0 right-0 mt-5 mr-4">
+  <div class="absolute top-0 right-0 mt-3 mr-2">
     <div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
       <input
         type="checkbox"
@@ -15,7 +15,13 @@
     </div>
   </div>
 
-  <div class="w-3/4 mt-8">
+  <div class="w-full lg:w-3/4 my-8 mx-5 lg:mx-0">
     <%= @inner_content %>
+  </div>
+
+  <div class="fixed bottom-0 w-full bg-white dark:bg-gray-800 py-2">
+    <a class="text-sm float-right mr-2 text-gray-600 dark:text-gray-200 hover:underline" href="https://github.com/sponsors/akoutmos" target="_blank">
+      Made with ❤️ by Alex Koutmos
+    </a>
   </div>
 </main>
