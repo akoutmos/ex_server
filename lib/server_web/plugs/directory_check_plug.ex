@@ -10,8 +10,8 @@ defmodule ServerWeb.DirectoryCheckPlug do
 
   require Logger
 
-  import Phoenix.Controller, only: [redirect: 2]
-  import Plug.Conn, only: [halt: 1, send_file: 3]
+  import Phoenix.Controller, only: [redirect: 2, protect_from_forgery: 1]
+  import Plug.Conn, only: [halt: 1, send_file: 3, put_resp_content_type: 2]
 
   alias Plug.Conn
 
@@ -24,6 +24,12 @@ defmodule ServerWeb.DirectoryCheckPlug do
 
   @impl true
   def call(%Conn{params: %{"path" => desired_path}} = conn, _opts) do
+    desired_path =
+      case desired_path do
+        [] -> "/"
+        path -> Path.join(path)
+      end
+
     requested_filesystem_object =
       File.cwd!()
       |> Path.join(desired_path)
@@ -31,18 +37,23 @@ defmodule ServerWeb.DirectoryCheckPlug do
     cond do
       File.dir?(requested_filesystem_object) ->
         Logger.info("Requested directory: #{inspect(requested_filesystem_object)}")
-        conn
+        protect_from_forgery(conn)
 
       File.exists?(requested_filesystem_object) ->
         Logger.info("Requested file: #{inspect(requested_filesystem_object)}")
+        content_type = MIME.from_path(requested_filesystem_object)
 
         conn
+        |> put_resp_content_type(content_type)
         |> send_file(200, requested_filesystem_object)
         |> halt()
 
       true ->
         Logger.warning("Invalid file system request: #{inspect(requested_filesystem_object)}")
-        redirect_to_cwd(conn)
+
+        conn
+        |> protect_from_forgery()
+        |> redirect_to_cwd()
     end
   end
 

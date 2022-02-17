@@ -31,6 +31,7 @@ defmodule ServerWeb.FileExplorerLive do
 
     cwd
     |> File.ls!()
+    |> Enum.sort(&(String.downcase(&1) <= String.downcase(&2)))
     |> Enum.map(fn entry ->
       file_stat =
         cwd

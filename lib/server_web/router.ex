@@ -8,7 +8,6 @@ defmodule ServerWeb.Router do
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, {ServerWeb.LayoutView, :root}
-    plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
 

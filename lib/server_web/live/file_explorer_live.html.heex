@@ -1,7 +1,42 @@
-<div class="grid grid-cols-5 gap-4">
-  <%= for {name, stats} <- @entries do %>
-    <%= live_redirect to: Routes.live_path(@socket, __MODULE__, @current_path ++ [name]) do %>
-      <%= name %>
+<div class="bg-gray-200 dark:bg-gray-700 rounded-md">
+  <div class="bg-gray-300 dark:bg-gray-800 rounded-t-md">
+    <div class="container flex items-center px-6 py-4 mx-auto overflow-y-auto whitespace-nowrap">
+      <%= live_redirect to: Routes.live_path(@socket, __MODULE__, []), class: "text-gray-600 dark:text-gray-200" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+        </svg>
+      <% end %>
+
+      <%= for {path, index} <- Enum.with_index(@current_path) do %>
+        <span class="mx-5 text-gray-500 dark:text-gray-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+            <path
+              fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </span>
+
+        <%= live_redirect to: Routes.live_path(@socket, __MODULE__, Enum.take(@current_path, index + 1)),
+                      class: "text-gray-600 dark:text-gray-200 hover:underline" do %>
+          <%= path %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-5 gap-4 p-10">
+    <%= for {name, stats} <- @entries do %>
+      <%= if stats.type == :directory do %>
+        <%= live_redirect to: Routes.live_path(@socket, __MODULE__, @current_path ++ [name]) do %>
+          <%= name %>
+        <% end %>
+      <% else %>
+        <a target="_blank" href={Routes.live_path(@socket, __MODULE__, @current_path ++ [name])}>
+          <%= name %>
+        </a>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
