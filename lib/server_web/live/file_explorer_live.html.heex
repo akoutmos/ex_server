@@ -31,38 +31,46 @@
   </div>
 
   <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-6">
-    <%= for {name, stats} <- @entries do %>
-      <%= if stats.type == :directory do %>
-        <%= live_redirect to: Routes.live_path(@socket, __MODULE__, @current_path ++ [name]) do %>
-          <div class="h-full max-w-xs mx-auto overflow-hidden bg-white rounded-lg hover:shadow-lg dark:bg-gray-800 flex flex-col border-2 border-gray-200 hover:border-gray-400 dark:border-gray-700 dark:hover:border-gray-500">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-8 fill-sky-700 dark:fill-sky-400 pt-2">
-              <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-              <path d="M464 96h-192l-64-64h-160C21.5 32 0 53.5 0 80V160h512V144C512 117.5 490.5 96 464 96zM0 432C0 458.5 21.5 480 48 480h416c26.5 0 48-21.5 48-48V192H0V432z" />
-            </svg>
+    <%= if @entries != [] do %>
+      <%= for {name, stats} <- @entries do %>
+        <%= if stats.type == :directory do %>
+          <%= live_redirect to: Routes.live_path(@socket, __MODULE__, @current_path ++ [name]) do %>
+            <div class="h-full max-w-xs mx-auto overflow-hidden bg-white rounded-lg hover:shadow-lg dark:bg-gray-800 flex flex-col border-2 border-gray-200 hover:border-gray-400 dark:border-gray-700 dark:hover:border-gray-500">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-8 fill-sky-700 dark:fill-sky-400 pt-2">
+                <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                <path d="M464 96h-192l-64-64h-160C21.5 32 0 53.5 0 80V160h512V144C512 117.5 490.5 96 464 96zM0 432C0 458.5 21.5 480 48 480h416c26.5 0 48-21.5 48-48V192H0V432z" />
+              </svg>
 
-            <div class="py-2 text-center">
-              <span class="text-sm text-gray-700 dark:text-gray-200 px-2 break-all">
-                <%= name %>
-              </span>
+              <div class="py-2 text-center">
+                <span class="text-sm text-gray-700 dark:text-gray-200 px-2 break-all">
+                  <%= name %>
+                </span>
+              </div>
             </div>
-          </div>
+          <% end %>
+        <% else %>
+          <a target="_blank" href={Routes.live_path(@socket, __MODULE__, @current_path ++ [name])}>
+            <div class="h-full max-w-xs mx-auto overflow-hidden bg-white rounded-lg hover:shadow-lg dark:bg-gray-800 flex flex-col border-2 border-gray-200 hover:border-gray-400 dark:border-gray-700 dark:hover:border-gray-500">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="h-8 fill-teal-700 dark:fill-teal-400 pt-2">
+                <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                <path d="M256 0v128h128L256 0zM224 128L224 0H48C21.49 0 0 21.49 0 48v416C0 490.5 21.49 512 48 512h288c26.51 0 48-21.49 48-48V160h-127.1C238.3 160 224 145.7 224 128z" />
+              </svg>
+
+              <div class="py-2 text-center">
+                <span class="text-sm text-gray-700 dark:text-gray-200 px-2 break-all">
+                  <%= name %>
+                </span>
+              </div>
+            </div>
+          </a>
         <% end %>
-      <% else %>
-        <a target="_blank" href={Routes.live_path(@socket, __MODULE__, @current_path ++ [name])}>
-          <div class="h-full max-w-xs mx-auto overflow-hidden bg-white rounded-lg hover:shadow-lg dark:bg-gray-800 flex flex-col border-2 border-gray-200 hover:border-gray-400 dark:border-gray-700 dark:hover:border-gray-500">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="h-8 fill-teal-700 dark:fill-teal-400 pt-2">
-              <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-              <path d="M256 0v128h128L256 0zM224 128L224 0H48C21.49 0 0 21.49 0 48v416C0 490.5 21.49 512 48 512h288c26.51 0 48-21.49 48-48V160h-127.1C238.3 160 224 145.7 224 128z" />
-            </svg>
-
-            <div class="py-2 text-center">
-              <span class="text-sm text-gray-700 dark:text-gray-200 px-2 break-all">
-                <%= name %>
-              </span>
-            </div>
-          </div>
-        </a>
       <% end %>
+    <% else %>
+      <div class="flex justify-center col-span-3 md:col-span-4 lg:col-span-5">
+        <span class="text-2xl text-gray-700 dark:text-gray-300 my-20">
+          Empty directory
+        </span>
+      </div>
     <% end %>
   </div>
 </div>
