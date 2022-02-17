@@ -14,11 +14,11 @@ Run the server from any directory by running `mix server`
 
 ### Light mode
 
-<img align="center" height="175" src="guides/images/light_mode.png" alt="Light mode screenshot">
+<img align="center" height="500" src="guides/images/light_mode.png" alt="Light mode screenshot">
 
 ### Dark mode
 
-<img align="center" height="175" src="guides/images/dark_mode.png" alt="Dark mode screenshot">
+<img align="center" height="500" src="guides/images/dark_mode.png" alt="Dark mode screenshot">
 
 ## Acknowledgements
 
