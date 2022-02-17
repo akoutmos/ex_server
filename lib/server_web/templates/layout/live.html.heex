@@ -1,11 +1,21 @@
-<main class="container">
-  <p class="alert alert-info" role="alert" phx-click="lv:clear-flash" phx-value-key="info">
-    <%= live_flash(@flash, :info) %>
-  </p>
+<main class="flex justify-center">
+  <div class="absolute top-0 right-0 mt-5 mr-4">
+    <div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+      <input
+        type="checkbox"
+        name="toggle"
+        id="toggle"
+        phx-click={JS.dispatch("server:toggle_theme")}
+        class="bg-yellow-200 border-yellow-400 mr-1 focus:ring-transparent toggle-checkbox absolute block w-6 h-6 rounded-full border-2 appearance-none cursor-pointer transition-colors ease-in-out duration-200"
+      />
+      <label
+        for="toggle"
+        class="toggle-label block h-8 -ml-1 -mt-1 rounded-full bg-gray-300 cursor-pointer transition-colors ease-in-out duration-200"
+      ></label>
+    </div>
+  </div>
 
-  <p class="alert alert-danger" role="alert" phx-click="lv:clear-flash" phx-value-key="error">
-    <%= live_flash(@flash, :error) %>
-  </p>
-
-  <%= @inner_content %>
+  <div class="max-w-7xl">
+    <%= @inner_content %>
+  </div>
 </main>
