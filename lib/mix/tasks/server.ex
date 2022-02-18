@@ -72,7 +72,7 @@ defmodule Mix.Tasks.Server do
     |> Mix.install()
 
     # Start the Phoenix server
-    {:ok, _} = Supervisor.start_link([ExServerWeb.Endpoint], strategy: :one_for_one)
+    {:ok, _} = ExServer.Application.start([], [])
     Process.sleep(:infinity)
   end
 

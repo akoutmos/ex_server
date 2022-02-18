@@ -1,7 +1,7 @@
 defmodule ExServer.MixProject do
   use Mix.Project
 
-  @version "0.1.0"
+  @version "0.2.0"
 
   def project do
     [
@@ -39,7 +39,7 @@ defmodule ExServer.MixProject do
   defp package do
     [
       name: "ex_server",
-      files: ~w(archives lib priv mix.exs README.md LICENSE),
+      files: ~w(lib priv mix.exs README.md LICENSE),
       licenses: ["MIT"],
       maintainers: ["Alex Koutmos"],
       links: %{
